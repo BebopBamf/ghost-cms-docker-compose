@@ -1,9 +1,8 @@
 version: '3'
-
 services:
-  
+
   ghost:
-    image: ghost:alpine
+    image: ghost:latest
     restart: always
     depends_on:
       - db
@@ -18,14 +17,14 @@ services:
         - ../content:/var/lib/ghost/content
         
   db:
-    image: mariadb:latest
+    image: mysql:8.0
     ports:
       - 3306:3306
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
     volumes:
-      - /opt/docker/mariadb:/var/lib/mysql
+      - ../mysql:/var/lib/mysql
       
   phpmyadmin:
     depends_on:
